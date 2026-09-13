@@ -1,0 +1,49 @@
+; ============================================================================
+; Silicon Labs CP210x USB to UART Bridge Driver INF
+; Compatible: Windows 7 / 8 / 10 / 11 (x64 / x86)
+; Hardware IDs: USB\VID_10C4&PID_EA60
+; ============================================================================
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=Ports
+ClassGuid={4D36E978-E325-11CE-BFC1-08002BE10318}
+Provider=%PROVIDER%
+DriverVer=09/19/2018,6.7.6.2130
+CatalogFile=silabser.cat
+
+[DestinationDirs]
+DefaultDestDir=12
+
+[Manufacturer]
+%PROVIDER%=SiLabs,NTamd64,NTx86
+
+[SiLabs.NTamd64]
+%CP2102.DeviceDesc%=Silabser_Install,USB\VID_10C4&PID_EA60
+%CP2104.DeviceDesc%=Silabser_Install,USB\VID_10C4&PID_EA61
+
+[SiLabs.NTx86]
+%CP2102.DeviceDesc%=Silabser_Install,USB\VID_10C4&PID_EA60
+%CP2104.DeviceDesc%=Silabser_Install,USB\VID_10C4&PID_EA61
+
+[Silabser_Install.NT]
+CopyFiles=Silabser_Files
+
+[Silabser_Files]
+silabser.sys
+
+[Silabser_Install.NT.Services]
+AddService=silabser,2,Silabser_Service
+
+[Silabser_Service]
+DisplayName=%CP210x.ServiceDesc%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%12%\silabser.sys
+
+[Strings]
+PROVIDER="Silicon Laboratories Inc."
+CP2102.DeviceDesc="Silicon Labs CP210x USB to UART Bridge (Laser Controller)"
+CP2104.DeviceDesc="Silicon Labs CP2104 USB to UART Bridge"
+CP210x.ServiceDesc="Silicon Labs CP210x USB to UART Driver"

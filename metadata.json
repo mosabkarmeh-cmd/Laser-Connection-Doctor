@@ -1,0 +1,6 @@
+{
+  "name": "Laser Connection Doctor",
+  "description": "Offline diagnostic and automated USB connection tool for laser engravers, GRBL, Ruida, and LightBurn machines with Web Serial API, D3 baud rate distribution vs success rate visualization, and port testing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

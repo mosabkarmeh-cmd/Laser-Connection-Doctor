@@ -1,0 +1,46 @@
+; ============================================================================
+; FTDI FT232R / FT232BM USB Serial Converter Driver INF
+; Compatible: Windows 7 / 8 / 10 / 11 (x64 / x86)
+; Hardware IDs: USB\VID_0403&PID_6001
+; ============================================================================
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=Ports
+ClassGuid={4D36E978-E325-11CE-BFC1-08002BE10318}
+Provider=%FTDI%
+DriverVer=08/16/2017,2.12.28.0
+CatalogFile=ftdiport.cat
+
+[DestinationDirs]
+DefaultDestDir=12
+
+[Manufacturer]
+%FTDI%=FTDI,NTamd64,NTx86
+
+[FTDI.NTamd64]
+%FTDI.Port%=FTDI_Port,FTDIBUS\COMPORT&VID_0403&PID_6001
+
+[FTDI.NTx86]
+%FTDI.Port%=FTDI_Port,FTDIBUS\COMPORT&VID_0403&PID_6001
+
+[FTDI_Port.NT]
+CopyFiles=FTDI_Files
+
+[FTDI_Files]
+ftser2k.sys
+
+[FTDI_Port.NT.Services]
+AddService=FTSER2K,2,FTDI_Service
+
+[FTDI_Service]
+DisplayName=%FTDI.ServiceDesc%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%12%\ftser2k.sys
+
+[Strings]
+FTDI="FTDI Ltd."
+FTDI.Port="USB Serial Port (FT232R Laser Controller)"
+FTDI.ServiceDesc="FTDI USB Serial Port Driver"

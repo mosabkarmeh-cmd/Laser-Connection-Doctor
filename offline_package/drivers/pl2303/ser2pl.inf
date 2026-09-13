@@ -1,0 +1,46 @@
+; ============================================================================
+; Prolific PL2303 Legacy Driver INF (v3.3.2.102 / v3.8.31.0 fallback)
+; Compatible: Windows 7 / 8 / 10 / 11 (x64 / x86)
+; Hardware IDs: USB\VID_067B&PID_2303
+; ============================================================================
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=Ports
+ClassGuid={4D36E978-E325-11CE-BFC1-08002BE10318}
+Provider=%PROLIFIC%
+DriverVer=09/24/2008,3.3.2.102
+CatalogFile=ser2pl64.cat
+
+[DestinationDirs]
+DefaultDestDir=12
+
+[Manufacturer]
+%PROLIFIC%=Prolific,NTamd64,NTx86
+
+[Prolific.NTamd64]
+%PL2303.DeviceDesc%=PL2303_Install,USB\VID_067B&PID_2303
+
+[Prolific.NTx86]
+%PL2303.DeviceDesc%=PL2303_Install,USB\VID_067B&PID_2303
+
+[PL2303_Install.NT]
+CopyFiles=PL2303_Files
+
+[PL2303_Files]
+ser2pl64.sys
+
+[PL2303_Install.NT.Services]
+AddService=ser2pl,2,PL2303_Service
+
+[PL2303_Service]
+DisplayName=%PL2303.ServiceDesc%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%12%\ser2pl64.sys
+
+[Strings]
+PROLIFIC="Prolific Technology Inc."
+PL2303.DeviceDesc="Prolific USB-to-Serial Comm Port (Legacy PL2303 HXA/XA)"
+PL2303.ServiceDesc="Prolific USB-to-Serial Controller Driver"
